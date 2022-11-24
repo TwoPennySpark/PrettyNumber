@@ -82,16 +82,19 @@ private:
 int main()
 {
     uint64_t nPretty = 0;
+    const uint8_t BASE = 13;
     // 1st - sum, 2nd - number of occurrences
-    std::unordered_map<uint64_t, uint32_t> hSumOccurs;
+    std::unordered_map<uint64_t, uint64_t> hSumOccurs;
 
     // count occurrences of every sum
-    for (uintBaseN<13, 7>i = "0000000"; i <= uintBaseN<13, 7>("0CCCCCC"); ++i)
+    for (uintBaseN<BASE, 7>i = "0000000"; i <= uintBaseN<BASE, 7>("0CCCCCC"); ++i)
         hSumOccurs[i.accumulate()]++;
 
     // Cartesian product
     for (auto& [_, n]: hSumOccurs)
         nPretty += n*n;
+
+    nPretty *= BASE;
 
     std::cout << "[*]ANSWER:" << nPretty << "\n";
 
